@@ -1,10 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-const array: Array<number> = [1, 2, 3];
-const readonlyArray: ReadonlyArray<number> = [1, 2, 3];
-array[0] = 12;
-// readonlyArray[0] = 12;
-
 const Counter: React.FC<{}> = () => {
   const initialValue: any = 0;
   const [value, setValue] = useState<number>(initialValue);
@@ -22,6 +17,10 @@ const Counter: React.FC<{}> = () => {
     console.log('render');
     renderTimes.current++;
   });
+  const ref = useRef<HTMLInputElement>(null!);
+  const focusInput = () => {
+    ref.current.focus();
+  };
 
   return (
     <div>
@@ -29,6 +28,8 @@ const Counter: React.FC<{}> = () => {
       <button onClick={increment}>+1</button>
       <button onClick={decrement}>-1</button>
       <div>This component was re-rendered {renderTimes.current} times!</div>
+      <input ref={ref} type="text" />
+      <button onClick={focusInput}>Click Me!</button>
     </div>
   );
 };
